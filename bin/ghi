@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
 
 require "ghi/cli"
+STDOUT.sync = true
 GHI::CLI::Executable.new(ARGV).run!
