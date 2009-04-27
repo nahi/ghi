@@ -1,4 +1,21 @@
 require "net/http"
+require "httpclient"
+module Net
+  class HTTP < Protocol
+    class << HTTP
+      def get(uri_or_host, path = nil, port = nil)
+        raise if path or port
+        HTTPClient.get_content(uri_or_host)
+      end
+
+      Response = Struct.new(:body)
+      def post_form(url, params)
+        result = HTTPClient.post_content(url, params)
+        Response.new(result)
+      end
+    end
+  end
+end
 require "yaml"
 
 module GHI
